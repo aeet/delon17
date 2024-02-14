@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "format",
+    "entryFile": "index.ts"
+  }
+}

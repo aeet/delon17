@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mini-area",
+    "entryFile": "public_api.ts"
+  }
+}

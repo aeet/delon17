@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "auto-focus",
+    "entryFile": "index.ts"
+  }
+}

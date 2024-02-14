@@ -1,0 +1,43 @@
+name: deploy
+
+on: push
+
+jobs:
+  website:
+    if: "startsWith(github.event.commits[0].message, 'release')"
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - run: yarn install
+
+      - name: build
+        run: |
+          yarn run site:build
+          cp ./src/dist/browser/index.html ./src/dist/browser/404.html
+          cp ./Dockerfile.docs ./src/dist/browser/Dockerfile.docs
+          cp -r ./_nginx/ ./src/dist/browser/_nginx
+
+      - name: deploy-to-gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        # env:
+        #   # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        #   # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   PUBLISH_BRANCH: gh-pages
+        #   PUBLISH_DIR: ./src/dist/browser
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./src/dist/browser
+          emptyCommits: false
+
+      - name: deploy-to-surge
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
+          domain: https://ng-yunzai-doc.surge.sh
+          project: ./src/dist/browser

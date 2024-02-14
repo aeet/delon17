@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "tag-select",
+    "entryFile": "public_api.ts"
+  }
+}

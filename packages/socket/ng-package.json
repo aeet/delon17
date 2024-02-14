@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/socket",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "socket",
+    "entryFile": "index.ts"
+  },
+  "allowedNonPeerDependencies": [
+    "ng-zorro-antd",
+    "@stomp/rx-stomp",
+    "@stomp/stompjs",
+    "@yelon/util"
+  ]
+}

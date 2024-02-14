@@ -1,0 +1,40 @@
+import { DOCUMENT } from '@angular/common';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { YunzaiAuthConfig } from '@yelon/util/config';
+
+import { YA_SERVICE_TOKEN, ITokenService } from './interface';
+import { JWTTokenModel } from './jwt/jwt.model';
+import { SimpleTokenModel } from './simple/simple.model';
+
+export function CheckSimple(model: SimpleTokenModel | null): boolean {
+  return model != null && typeof model.token === 'string' && model.token.length > 0;
+}
+
+export function CheckJwt(model: JWTTokenModel, offset: number): boolean {
+  try {
+    return model != null && !!model.token && !model.isExpired(offset);
+  } catch (err: unknown) {
+    if (typeof ngDevMode === 'undefined' || ngDevMode) {
+      console.warn(`${(err as { message: string }).message}, jump to login_url`);
+    }
+    return false;
+  }
+}
+
+export function ToLogin(options: YunzaiAuthConfig, url?: string): void {
+  const router = inject(Router);
+  const token = inject(YA_SERVICE_TOKEN) as ITokenService;
+  const doc = inject(DOCUMENT);
+  token.referrer!.url = url || router.url;
+  if (options.token_invalid_redirect === true) {
+    setTimeout(() => {
+      if (/^https?:\/\//g.test(options.login_url!)) {
+        doc.location.href = options.login_url as string;
+      } else {
+        router.navigate([options.login_url]);
+      }
+    });
+  }
+}

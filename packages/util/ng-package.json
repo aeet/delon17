@@ -1,0 +1,9 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@yelon/util",
+  "deleteDestPath": true,
+  "lib": {
+    "entryFile": "index.ts"
+  },
+  "allowedNonPeerDependencies": ["date-fns", "extend", "@ant-design/icons-angular"]
+}

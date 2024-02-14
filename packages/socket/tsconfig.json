@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "baseUrl": ".",
+    "paths": {
+      "@yelon/bis/*": ["./*"],
+      "@yelon/*": ["../*"]
+    }
+  },
+  "files": ["public_api.ts", "../typings.d.ts"],
+  "include": ["./**/*.ts"]
+}
