@@ -24,7 +24,6 @@ import {
 import { filter } from 'rxjs';
 
 import { SettingsService } from '@yelon/theme';
-import { LayoutDisplayService } from '@yelon/theme/layout-default/layout-display.service';
 import { updateHostClass } from '@yelon/util/browser';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -32,6 +31,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { LayoutDefaultHeaderItemComponent } from './layout-header-item.component';
 import { LayoutDefaultService } from './layout.service';
 import { LayoutDefaultOptions } from './types';
+import {LayoutDisplayService} from './layout-display.service';
 
 @Component({
   selector: 'layout-default',
